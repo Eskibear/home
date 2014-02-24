@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/tmp/yaourt-tmp-six/aur-brother-mfc7440n'
+let g:netrw_dirhist_2='/home/six/oj/.git'
+let g:netrw_dirhist_3='/home/six/recSys/cit_rs/res/mergemovie'
+let g:netrw_dirhist_4='/home/six'
