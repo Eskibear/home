@@ -63,6 +63,11 @@ nmap <c-s> <c-w>_<c-w>\|
 nmap ( a()<esc>i
 nmap [ a[]<esc>i
 nmap { a{}<esc>i<cr><esc>O
+" input brace map
+"inoremap ( ()<esc>i
+"inoremap [ []<esc>i
+"inoremap { {}<esc>i
+
 " folding
 "-------------------------------------------------------------------------------------
 set foldenable " turn on folding
@@ -72,8 +77,9 @@ set foldopen -=search " don't open folds when you search into them
 set foldopen -=undo " don't open folds when you undo stuff 
 set foldopen -=quickfix 
 map <f2> :e ./<cr>
-map <s-y> "+y
 
 let g:acp_enableAtStartup = 0 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
+inoremap <expr><CR>  pumvisible() ? "\<C-n>" : "\<CR>" 
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>" 
