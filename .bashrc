@@ -8,7 +8,11 @@
 
 # color definition
 ORE='\[\e[0m\]'
-PS1='\n\[\e[1;33m\][\u@\h \[\e[4;34m\]\w'$ORE'\[\e[1;33m\]]\n\$> \[\e[0m\]'
+YELLOW='\[\e[1;33m\]'
+GRENN='\[\e[1;32m\]'
+BLUE='\[\e[1;34m\]'
+
+PS1='\n'$YELLOW'[\u '$GRENN'\h '$BLUE'\w'$ORE'\[\e[1;33m\]]\n\$> \[\e[0m\]'
 #\[\e[34m\]
 #\[\e[m\]
 
@@ -23,6 +27,7 @@ alias rm='rm -i'
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias la='ls -al --color=auto'
+alias grep='grep --color'
 alias sd='sudo'
 alias sc='sudo systemctl'
 alias pm='sudo pacman'
