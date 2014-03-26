@@ -81,5 +81,11 @@ map <f2> :e ./<cr>
 let g:acp_enableAtStartup = 0 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
-inoremap <expr><CR>  pumvisible() ? "\<C-n>" : "\<CR>" 
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>" 
+
+" AutoComplPop like behavior. 
+let g:neocomplcache_enable_auto_select = 1 
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>" 
+" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>" 
+" inoremap <expr><CR>  pumvisible() ? "\<C-n>" : "\<CR>" 
+inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
