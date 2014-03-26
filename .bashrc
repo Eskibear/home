@@ -20,6 +20,8 @@ PS1='\n'$YELLOW'[\u '$GRENN'\h '$BLUE'\w'$ORE'\[\e[1;33m\]]\n\$> \[\e[0m\]'
 export WINEPREFIX="/home/six/.wine32/"
 export WINEARCH="win32"
 
+
+alias ..='cd ..'
 # confirm before any rm operation
 alias rm='rm -i'
 
@@ -40,12 +42,14 @@ _completion_loader systemctl
 _completion_loader netctl
 _completion_loader pacman
 _completion_loader yaourt
+_completion_loader sudo
 complete -F _systemctl -o default sc
 complete -F _pacman -o default pm
 complete -F _netctl -o default n
 complete -F _netctl_auto -o default na
 complete -F _yaourt -o default y
+complete -F _sudo -o default sd
 
 # mount smb fs in lab
-alias mshare='sudo mount -t cifs //192.168.1.66/ShareFolder /mnt/winshare -o user=sdf,password=sdf,uid=1000 '
+alias mshare='sudo mount -t cifs //192.168.1.66/SharedFolder /mnt/winshare -o user=sdf,password=sdf,uid=1000,gid=100'
 alias umshare='sudo umount /mnt/winshare'
