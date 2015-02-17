@@ -10,12 +10,12 @@ set expandtab
 
 set ambiwidth=double
 
-set clipboard+=unnamed
+set clipboard=unnamedplus
 
 set noru
 set nu
 
-set hls
+set nohls
 set mouse=a
 set laststatus=2
 set statusline=%F\ %m%r%=%l,%c%V\ %p%%
@@ -30,6 +30,8 @@ set encoding=utf-8
 " Indent related
 set smartindent
 set autoindent
+au FileType desc setlocal noautoindent
+au FileType desc setlocal nosmartindent
 "set cino=:0g0t0(susj1
 
 " Editing relate
@@ -78,6 +80,8 @@ set foldopen -=undo " don't open folds when you undo stuff
 set foldopen -=quickfix 
 map <f2> :e ./<cr>
 
+set guioptions=
+
 let g:acp_enableAtStartup = 0 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
@@ -89,3 +93,10 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>" 
 " inoremap <expr><CR>  pumvisible() ? "\<C-n>" : "\<CR>" 
 inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"
+
+" JP translation related 
+au BufRead,BufNewFile *.trans set filetype=trans
+"au FileType trans vmap <C-y>/ s「」<esc>P
+"au FileType trans nmap <C-y>. <s-v>yp<s-v>:s/.\{-\}\(\(。」\)\\|\(\(。\\|、\)\)\)/## &\r@@ \r/g<cr>j
+"

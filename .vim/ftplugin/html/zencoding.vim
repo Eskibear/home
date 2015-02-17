@@ -66,6 +66,9 @@
 " GetLatestVimScripts: 2981 1 :AutoInstall: zencoding.vim
 " script type: plugin
 
+" if !(exists('g:enable_zencoding_vim') && g:enable_zencoding_vim)
+"   finish
+" endif
 if &cp || (exists('g:loaded_zencoding_vim') && g:loaded_zencoding_vim)
   finish
 endif
