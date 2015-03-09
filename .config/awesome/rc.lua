@@ -630,6 +630,16 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
+              end),
+    awful.key({ modkey }, "n",
+              function ()
+                  awful.prompt.run({ prompt = "Create New Tag: " },
+                  mypromptbox[mouse.screen].widget,
+                  awful.tag.add, nil)
+              end),
+    awful.key({ modkey, "Shift" }, "n",
+              function ()
+                  awful.tag.delete()
               end)
 )
 
@@ -640,7 +650,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
+    awful.key({ modkey,           }, "d",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
@@ -722,7 +732,7 @@ awful.rules.rules = {
     { rule = { class = "Firefox" }, 
           properties = { floating = true } },
 
-    { rule = { class = "chromium" },
+    { rule = { class = "Google-chrome-stable" },
           properties = { floating = true } },
 
     { rule = { class = "Audacious"}, 
