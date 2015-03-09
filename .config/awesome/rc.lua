@@ -233,15 +233,21 @@ function()
     state = fh:read("*l")
     fh:close()    
 
-    if tonumber(remain) <10 then 
+    if tonumber(remain) <15 then 
         color = "#EA6F81"
         baticon:set_image(beautiful.widget_battery_empty)
+        --hint
+        warnNotice = naughty.notify({
+            preset = { title = "Attention!! Battery Low !", timeout = 5 }
+        })
     else 
         color = "#FFFFFF"
     end
     if state == "Charging" then
         color = "#53FF53"
         baticon:set_image(beautiful.widget_ac)
+        --hint
+        naughty.destroy(warnNotice)
     end
     batterywidget:set_markup(markup(color , remain .. "%") )
 end    
