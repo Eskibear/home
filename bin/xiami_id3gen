@@ -1,0 +1,22 @@
+#!/bin/bash
+# Description:  Generate id3tag for mp3 files acco-
+#               rding to filename.
+#               Esp. for xiami mp3 files downloaded
+#               by you-get.
+# Dependency:   mp3info
+# Author:       Eskibear
+
+echo $#;
+if [ $# -eq 0 ];then
+    echo "xiami_id3gen <title - artist - album mp3file>"
+else
+    for f in "$@"
+    do
+        echo $f
+        str=$(echo $f  | sed -e 's/\.mp3//' -e 's/ - /@/g')
+        title=$(echo $str | cut -d '@' -f 1)
+        artist=$(echo $str | cut -d '@' -f 2)
+        album=$(echo $str | cut -d '@' -f 3)
+        mp3info -t "$title" -l "$album" -a "$artist" "$f"
+    done
+fi
