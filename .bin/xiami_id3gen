@@ -1,10 +1,6 @@
 #!/bin/bash
-# Description:  Generate id3tag for mp3 files acco-
-#               rding to filename.
-#               Esp. for xiami mp3 files downloaded
-#               by you-get.
-# Dependency:   mp3info
-# Author:       Eskibear
+# dependency:   [mp3info] for id3 v1 only
+#           or  [id3]     for id3 v1 v2 
 
 echo $#;
 if [ $# -eq 0 ];then
@@ -17,6 +13,8 @@ else
         title=$(echo $str | cut -d '@' -f 1)
         artist=$(echo $str | cut -d '@' -f 2)
         album=$(echo $str | cut -d '@' -f 3)
-        mp3info -t "$title" -l "$album" -a "$artist" "$f"
+
+        #mp3info -t "$title" -l "$album" -a "$artist" "$f"
+        id3 -2 -d -t "$title" -l "$album" -a "$artist" "$f"
     done
 fi

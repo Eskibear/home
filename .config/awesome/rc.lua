@@ -67,12 +67,12 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-darker/t
 -- common
 modkey     = "Mod4"
 altkey     = "Mod1"
-terminal   = "gnome-terminal" or "urxvt" or "xterm"
-editor     = os.getenv("EDITOR") or "vi" or "nano"
+terminal   = "gnome-terminal" or "xfce4-terminal" or "xterm"
+editor     = os.getenv("EDITOR") or "vim" or "nano"
 editor_cmd = terminal .. " -e '" .. editor
 
 -- user defined
-browser    = "firefox"
+browser    = "google-chrome-stable"
 nemo       = "nemo --no-desktop"
 --browser2   = "iron"
 gui_editor = "gvim"
@@ -93,8 +93,8 @@ local layouts = {
 
 -- {{{ Tags
 tags = {
-   names = { "Code", "Web", "Work", "Music", },
-   layout = { layouts[2], layouts[1], layouts[1], layouts[1], }
+   names = { "Code", "Web", "Trans", "Music", },
+   layout = { layouts[2], layouts[1], layouts[2], layouts[1], }
 }
 
 for s = 1, screen.count() do
@@ -269,23 +269,6 @@ function()
 end
 )
 batterywidgettimer:start()
---batwidget = lain.widgets.bat({
---    settings = function()
---        if bat_now.perc == "N/A" then
---            widget:set_markup(" AC ")
---            baticon:set_image(beautiful.widget_ac)
---            return
---        elseif tonumber(bat_now.perc) <= 5 then
---            baticon:set_image(beautiful.widget_battery_empty)
---        elseif tonumber(bat_now.perc) <= 15 then
---            baticon:set_image(beautiful.widget_battery_low)
---        else
---            baticon:set_image(beautiful.widget_battery)
---        end
---        widget:set_markup(" " .. bat_now.perc .. "% ")
---    end
---})
-
 
 -- ALSA volume
 volicon = wibox.widget.imagebox(beautiful.widget_vol)
@@ -705,6 +688,16 @@ for i = 1, 9 do
                       end
                   end))
 end
+-- Bind PrintScreen key to `scrot -s`
+-- date +%y%m%d_%H%M%S
+-- Dependency: scrot
+globalkeys = awful.util.table.join(globalkeys,
+    awful.key( {}, "Print",
+        function()
+            awful.util.spawn_with_shell("scrot ~/pics/screenshots/`date +%y%m%d_%H%M%S`.png",false)
+        end
+    )
+)
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
