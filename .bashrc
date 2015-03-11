@@ -16,10 +16,6 @@ PS1='\n'$YELLOW'[\u '$GRENN'\H '$BLUE'\w'$ORE'\[\e[1;33m\]]\n\$> \[\e[0m\]'
 #\[\e[34m\]
 #\[\e[m\]
 
-# for office 2010
-#export WINEPREFIX="/home/six/.wine32/"
-#export WINEARCH="win32"
-
 
 alias ..='cd ..'
 # confirm before any rm operation
@@ -50,13 +46,8 @@ complete -F _netctl_auto -o default na
 complete -F _yaourt -o default y
 complete -F _sudo -o default sd
 
-# mount smb fs in lab
-alias mshare='sudo mount -t cifs //192.168.1.66/SharedFolder /mnt/winshare -o user=six,uid=1000,gid=100'
-alias umshare='sudo umount /mnt/winshare'
-
 #editor
 export EDITOR="vim"
 
-# vpn
-alias vpnon='sudo openvpn --daemon --config /etc/openvpn/cit/citclient.conf'
-alias vpnoff='sudo killall openvpn'
+# local bin folder
+export PATH=$PATH:~/.bin
