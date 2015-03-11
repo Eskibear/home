@@ -1,6 +1,11 @@
 #!/bin/bash
-# dependency:   [mp3info] for id3 v1 only
-#           or  [id3]     for id3 v1 v2 
+# Description:  Generate id3tag for mp3 files acco-
+#               rding to filename.
+#               Esp. for xiami mp3 files downloaded
+#               by you-get.
+# Author:       Eskibear
+# Dependency:       [mp3info] for id3 v1 only
+#               or  [id3]     for id3 v1 v2 
 
 echo $#;
 if [ $# -eq 0 ];then
@@ -8,13 +13,18 @@ if [ $# -eq 0 ];then
 else
     for f in "$@"
     do
-        echo $f
-        str=$(echo $f  | sed -e 's/\.mp3//' -e 's/ - /@/g')
-        title=$(echo $str | cut -d '@' -f 1)
-        artist=$(echo $str | cut -d '@' -f 2)
-        album=$(echo $str | cut -d '@' -f 3)
+        if [ -f "$f" ];then
+            echo $f
+            sf=${f##*/}
+            str=$(echo $sf  | sed -e 's/\.mp3//' -e 's/ - /@/g')
+            title=$(echo $str | cut -d '@' -f 1)
+            artist=$(echo $str | cut -d '@' -f 2)
+            album=$(echo $str | cut -d '@' -f 3)
 
-        #mp3info -t "$title" -l "$album" -a "$artist" "$f"
-        id3 -2 -d -t "$title" -l "$album" -a "$artist" "$f"
+            #mp3info -t "$title" -l "$album" -a "$artist" "$f"
+            id3 -2 -d -t "$title" -l "$album" -a "$artist" "$f"
+        else
+            echo ERR: $f not found!
+        fi
     done
 fi
