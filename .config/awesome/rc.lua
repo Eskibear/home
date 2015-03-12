@@ -81,6 +81,7 @@ gui_editor = "gvim"
 --iptraf     = terminal .. " -g 180x54-20+34 -e sudo iptraf-ng -i all "
 --musicplr   = "urxvt -g 130x34-320+16 -e ncmpcpp "
 musicplr  = terminal .. " --geometry=130x34+380+16 -t 'ncmpcpp' -e 'ncmpcpp'"
+dropdownProg = terminal
 
 local layouts = {
     awful.layout.suit.floating,
