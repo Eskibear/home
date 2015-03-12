@@ -93,8 +93,8 @@ local layouts = {
 
 -- {{{ Tags
 tags = {
-   names = { "Code", "Web", "Trans", "Music", },
-   layout = { layouts[2], layouts[1], layouts[2], layouts[1], }
+   names = { "tty", "Code", "Web", "File", "Music", },
+   layout = { layouts[2], layouts[2], layouts[1], layouts[1], layouts[1], }
 }
 
 for s = 1, screen.count() do
@@ -551,7 +551,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     -- Dropdown terminal
-    awful.key({        	          }, "F1",     function () drop(terminal, "bottom", "center", 0.6, 0.5) end),
+    awful.key({        	          }, "F1",     function () drop(dropdownProg, "bottom", "center", 0.6, 0.5) end),
 
     -- Widgets popups
     awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
@@ -605,7 +605,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
 
     -- User programs
-    --awful.key({ modkey }, "q", function () awful.util.spawn(browser) end),
+    awful.key({ modkey }, "e", function () awful.util.spawn(nemo) end),
     --awful.key({ modkey }, "i", function () awful.util.spawn(browser2) end),
     --awful.key({ modkey }, "s", function () awful.util.spawn(gui_editor) end),
     --awful.key({ modkey }, "g", function () awful.util.spawn(graphics) end),
@@ -613,6 +613,12 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ altkey }, "F2", function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ altkey }, "F1",
+               function ()
+                   awful.prompt.run({ prompt = "Create Dropdown Prog for F1: " },
+                   mypromptbox[mouse.screen].widget,
+                   setF1DropProg, nil)
+               end),
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -698,6 +704,15 @@ globalkeys = awful.util.table.join(globalkeys,
         end
     )
 )
+--- Custom Dropdown Prog
+function setF1DropProg(prog)
+ --   globalkeys = awful.util.table.join(globalkeys,
+ --       awful.key({ }, "F1",     function () drop(prog, "bottom", "center", 0.6, 0.5) end)
+ --   )
+ --   root.keys(globalkeys)
+    dropdownProg = prog
+end
+
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
