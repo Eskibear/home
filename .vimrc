@@ -3,8 +3,8 @@ set nocp
 " do not ignore case when search/replace
 set ignorecase
 " Tab related
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set smarttab
 set expandtab
 
@@ -16,7 +16,7 @@ set noru
 set nu
 
 set nohls
-set mouse=a
+set mouse=c
 set laststatus=2
 set statusline=%F\ %m%r%=%l,%c%V\ %p%%
 set showmatch
@@ -37,7 +37,7 @@ au FileType desc setlocal nosmartindent
 " Editing relate
 set backspace=indent,eol,start
 set whichwrap=b,s,<,>,[,]
-set mouse=a
+set mouse=c
 set mousemodel=popup
 set selection=inclusive
 
@@ -80,8 +80,6 @@ set foldopen -=undo " don't open folds when you undo stuff
 set foldopen -=quickfix 
 map <f2> :e ./<cr>
 
-set guioptions=
-
 let g:acp_enableAtStartup = 0 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
@@ -97,6 +95,3 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " JP translation related 
 au BufRead,BufNewFile *.trans set filetype=trans
-"au FileType trans vmap <C-y>/ s「」<esc>P
-"au FileType trans nmap <C-y>. <s-v>yp<s-v>:s/.\{-\}\(\(。」\)\\|\(\(。\\|、\)\)\)/## &\r@@ \r/g<cr>j
-"
