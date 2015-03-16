@@ -186,7 +186,6 @@ mpriswidget = lain.widgets.contrib.mpris({
         widget:set_markup(markup("#EA6F81", artist) .. title)
     end
 })
-mpriswidgetbg = wibox.widget.background(mpriswidget, "#313131")
 
 -- MEM
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
@@ -202,7 +201,7 @@ cpuwidget = wibox.widget.background(lain.widgets.cpu({
     settings = function()
         widget:set_text(" " .. cpu_now.usage .. "% ")
     end
-}), "#313131")
+}))
 
 -- Coretemp
 tempicon = wibox.widget.imagebox(beautiful.widget_temp)
@@ -219,7 +218,6 @@ fswidget = lain.widgets.fs({
         widget:set_text(" " .. fs_now.used .. "% ")
     end
 })
-fswidgetbg = wibox.widget.background(fswidget, "#313131")
 
 -- Battery
 --[[baticon = wibox.widget.imagebox(beautiful.widget_battery)
@@ -360,39 +358,27 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the upper right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(spr)
     right_layout:add(arrl)
-    right_layout:add(arrl_ld)
     right_layout:add(mprisicon)
-    right_layout:add(mpriswidgetbg)
-    right_layout:add(arrl_dl)
+    right_layout:add(mpriswidget)
+    right_layout:add(arrl)
     right_layout:add(volicon)
     right_layout:add(volumewidget)
-    right_layout:add(arrl_ld)
-    --right_layout:add(mailicon)
-    --right_layout:add(mailwidget)
-    right_layout:add(arrl_dl)
+    right_layout:add(arrl)
     right_layout:add(memicon)
     right_layout:add(memwidget)
-    right_layout:add(arrl_ld)
+    right_layout:add(arrl)
     right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
-    right_layout:add(arrl_dl)
+    right_layout:add(arrl)
     right_layout:add(tempicon)
     right_layout:add(tempwidget)
-    right_layout:add(arrl_ld)
+    right_layout:add(arrl)
     right_layout:add(fsicon)
-    right_layout:add(fswidgetbg)
-    --right_layout:add(arrl_ld)
-    --right_layout:add(baticon)
-    --right_layout:add(batwidget)
-    --right_layout:add(arrl_ld)
-    --right_layout:add(neticon)
-    --right_layout:add(netwidget)
-    right_layout:add(arrl_dl)
+    right_layout:add(fswidget)
+    right_layout:add(arrl)
     right_layout:add(mytextclock)
-    right_layout:add(spr)
-    right_layout:add(arrl_ld)
+    right_layout:add(arrl)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)

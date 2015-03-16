@@ -8,7 +8,7 @@
 theme                               = {}
 
 themes_dir                          = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-darker"
-theme.wallpaper                     = os.getenv("HOME") .. "/pics/kabe/current.jpg"
+theme.wallpaper                     = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-darker//background.jpg"
 
 theme.font                          = "Terminus 9"
 theme.fg_normal                     = "#DDDDFF"
@@ -67,8 +67,8 @@ theme.widget_cpu                    = themes_dir .. "/icons/cpu.png"
 theme.widget_temp                   = themes_dir .. "/icons/temp.png"
 theme.widget_net                    = themes_dir .. "/icons/net.png"
 theme.widget_hdd                    = themes_dir .. "/icons/hdd.png"
-theme.widget_music                  = themes_dir .. "/icons/note.png"
-theme.widget_music_on               = themes_dir .. "/icons/note_on.png"
+theme.widget_music                  = themes_dir .. "/icons/music.png"
+theme.widget_music_on               = themes_dir .. "/icons/music_on.png"
 theme.widget_vol                    = themes_dir .. "/icons/vol.png"
 theme.widget_vol_low                = themes_dir .. "/icons/vol_low.png"
 theme.widget_vol_no                 = themes_dir .. "/icons/vol_no.png"
