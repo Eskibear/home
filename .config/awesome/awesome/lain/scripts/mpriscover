@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# This script is modified from *mpdcover* for mpris cover fetching use.
+#
+# Dependencies: imagemagick.
+#
+# Usage: mpriscover <cover_path> <cover_resize> <default_art>
+# *Note*: work with `artUrl` provided by mpris.
+
+# Cover from mpris
+COVER=$1
+
+# Path of temporary resized cover
+TEMP_PATH="/tmp/mpriscover.png"
+
+# Resize cover
+COVER_RESIZE="$2x$2"
+
+if [ $COVER_RESIZE == "x" ]; then
+    COVER_RESIZE="100x100"
+fi
+
+# The default cover to use (optional)
+DEFAULT_ART=$3
+
+# Thumbnail background (transparent)
+COVER_BACKGROUND="none"
+
+#--------------------------------------------------------------------
+
+# when no cover is found, use DEFAULT_ART as cover
+COVER="${COVER:=$DEFAULT_ART}"
+
+# check if art is available
+if [[ -n $COVER ]]; then
+    if [[ -n $COVER_RESIZE ]]; then
+        convert "$COVER" -scale $COVER_RESIZE -gravity "center" -background "$COVER_BACKGROUND" "$TEMP_PATH"
+        COVER="$TEMP_PATH"
+    fi
+else
+  rm $TEMP_PATH
+fi
+
+exit 0
