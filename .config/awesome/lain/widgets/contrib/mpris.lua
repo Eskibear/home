@@ -71,8 +71,8 @@ local function worker(args)
 
     --local mprisinfo  = helpers.scripts_dir .. "mpris.py"
     --local mpriscover = helpers.scripts_dir .. "mpriscover"
-    local mprisinfo  = "/home/six/.config/awesome/lain/scripts/mpris.py"
-    local mpriscover  = "/home/six/.config/awesome/lain/scripts/mpriscover"
+    local mprisinfo  = os.getenv("HOME") .. "/.config/awesome/lain/scripts/mpris.py"
+    local mpriscover = os.getenv("HOME") .. "/.config/awesome/lain/scripts/mpriscover"
 
     mpris.widget = wibox.widget.textbox('')
 
