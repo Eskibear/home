@@ -67,7 +67,6 @@ local function worker(args)
     local player      = args.player or "audacious"
     local cover_size  = args.cover_size or 100
     local default_art = args.default_art or os.getenv("HOME") .. "/.config/awesome/lain/img/cover.png"
-
     local settings    = args.settings or function() end
 
     --local mprisinfo  = helpers.scripts_dir .. "mpris.py"
@@ -106,7 +105,7 @@ local function worker(args)
                 artist = "N/A",
                 title  = "N/A",
                 album  = "N/A",
-                cover  = "N/A"
+                cover  = ""
             }
 
             for line in f:lines() do
