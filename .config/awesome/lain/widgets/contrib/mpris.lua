@@ -66,7 +66,8 @@ local function worker(args)
     local timeout     = args.timeout or 2
     local player      = args.player or "audacious"
     local cover_size  = args.cover_size or 100
-    local default_art = args.default_art or ""
+    local default_art = args.default_art or os.getenv("HOME") .. "/.config/awesome/lain/img/cover.png"
+
     local settings    = args.settings or function() end
 
     --local mprisinfo  = helpers.scripts_dir .. "mpris.py"
