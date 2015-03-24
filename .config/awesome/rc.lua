@@ -114,19 +114,22 @@ end
 -- {{{ Menu
 --require("freedesktop/freedesktop")
 myawesomemenu = {
-  { "manual", terminal .. " -e 'man awesome'" },
+ -- { "manual", terminal .. " -e 'man awesome'" },
   { "edit config", editor_cmd .. " " .. awesome.conffile .. "'"},
   { "restart", awesome.restart },
   { "quit", awesome.quit },
-  { "shutdown", "systemctl poweroff" },
-  { "reboot", "systemctl reboot" },
 }
-
+mypowermenu = {
+  { "suspend", "systemctl suspend" },
+  { "hibernate", "systemctl hibernate" },
+  { "reboot", "systemctl reboot" },
+  { "shutdown", "systemctl poweroff" },
+}
 mymainmenu = awful.menu({ items = {
+  { "=======", "" },
   { "awesome",  myawesomemenu, beautiful.awesome_icon },
-  { "terminal", terminal },
-  { "browser",  browser},
-  { "file",     nemo}, 
+  { "power",  mypowermenu, beautiful.awesome_icon },
+  { "=======", "" },
 }})
 mylauncher = awful.widget.launcher({ menu = mymainmenu })
 -- }}}
