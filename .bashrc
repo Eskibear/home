@@ -51,3 +51,9 @@ export EDITOR="vim"
 
 # local bin folder
 export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.gem/ruby/2.2.0/bin
+
+# including this ensures that new gnome-terminal tabs keep the parent `pwd` !
+if [ -e /etc/profile.d/vte.sh ]; then
+    . /etc/profile.d/vte.sh
+fi
