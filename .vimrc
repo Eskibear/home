@@ -56,7 +56,7 @@ set bsdir=buffer
 set autochdir
 
 "tab switch
-map <s-tab> :tabn<CR>
+map <s-tab> :tabn<CR>:e %<cr>
 
 "========================
 "tab maximize
@@ -95,3 +95,4 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " JP translation related 
 au BufRead,BufNewFile *.trans set filetype=trans
+au FileType html setlocal cursorcolumn
