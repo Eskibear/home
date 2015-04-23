@@ -96,3 +96,5 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " JP translation related 
 au BufRead,BufNewFile *.trans set filetype=trans
 au FileType html setlocal cursorcolumn
+
+vmap <s-p> "0p
