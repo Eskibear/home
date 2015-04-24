@@ -106,3 +106,4 @@ $(prompt_char) '
 
 RPROMPT='%{$fg[green]%}[%*]%{$reset_color%}'
 
+alias fuck='eval $(thefuck $(fc -ln -1))'
