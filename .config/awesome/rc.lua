@@ -19,6 +19,12 @@ local yidoc     = require("yidoc")
 -- }}}
 
 -- {{{ Error handling
+function dbg(e)
+  naughty.notify({ preset = naughty.config.presets.critical,
+  title = "debug",
+  text = e })
+end
+
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
@@ -93,14 +99,70 @@ local layouts = {
 -- }}}
 
 -- {{{ Tags
-tags = {
-   names = { "tty", "Code", "Web", "File", "Music", },
-   layout = { layouts[2], layouts[2], layouts[1], layouts[1], layouts[1], }
-}
+-- load tags layouts from config file
+function load_tags_config()
+  default_tag_params = {
+    { "tty", 2},
+    { "Code", 2},
+    { "Web", 1},
+    { "File", 1},
+    { "Music", 1}
+  }
+  file = io.open(os.getenv("HOME") .. "/.awesome_tags")
+  if file == nil then 
+    tag_params = default_tag_params
+  else 
+    tag_params = {}
+    while true do
+      line = file:read()
+      if line == nil then break end
+      print (line)
+      n,v = string.match(line, "(%w+),(%d)")
+      table.insert(tag_params, {n, 1*v})
+    end
+  end
+
+  names={}
+  layout={}
+  for k,v in pairs(tag_params) do
+    table.insert(names, v[1])
+    table.insert(layout, layouts[v[2]])
+  end
+  return { names = names, layout = layout }
+end
+
+function indexof(t,e)
+  for k,v in pairs(t) do
+    if v == e then return k end
+  end
+  return 1
+end
+
+-- save tags layouts into config file
+function save_tags_config()
+  tag_params = {}
+  file = io.open(os.getenv("HOME") .. "/.awesome_tags", "w")
+  taglist = awful.tag.gettags(1)
+  for k,v in pairs(taglist) do
+    n=v.name
+    l=indexof(layouts, awful.tag.getproperty(v,"layout"))
+    table.insert(tag_params, {n,l})
+  end
+  
+  -- print tags:  <name>, <layout#>
+  for k,v in pairs(tag_params) do
+    file:write( v[1] .. "," .. v[2] .. "\n")
+  end
+
+  file.close()
+end
+
+tags =  load_tags_config()
 
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
+
 -- }}}
 
 -- {{{ Wallpaper
@@ -628,11 +690,12 @@ globalkeys = awful.util.table.join(
               function ()
                   awful.prompt.run({ prompt = "Create New Tag: " },
                   mypromptbox[mouse.screen].widget,
-                  awful.tag.add, nil)
+                  awful.tag.add, nil, nil, nil, save_tags_config)
               end),
     awful.key({ modkey, "Shift" }, "n",
               function ()
                   awful.tag.delete()
+                  save_tags_config()
               end)
 )
 
@@ -731,9 +794,6 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
 	                   size_hints_honor = false } },
-
-    { rule = { name = "ncmpcpp" },
-          properties = { tag = tags[1][3]} },
 
     { rule = { class = "URxvt" },
           properties = { opacity = 0.95 } },
