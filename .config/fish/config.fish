@@ -21,7 +21,7 @@ function n -d 'netctl'
 end
 
 function rm -d 'rm -i'
-  rm -i $argv
+  command rm -i $argv
 end
 
 function pm -d 'pacman'
@@ -37,7 +37,7 @@ function y -d 'yaourt'
 end
 
 function dmesg -d 'dmesg readable'
-  dmesg --human $argv
+  command dmesg --human $argv
 end
 
 function sc -d 'systemctl'
