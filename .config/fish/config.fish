@@ -1,6 +1,7 @@
 # vi-mode
 #set -g fish_key_bindings fish_vi_key_bindings
 
+set PATH $PATH ~/.bin ~/.gem/ruby/2.2.0/bin
 # alias {{
 # op
 function c -d 'clear screen'
@@ -54,6 +55,10 @@ end
 
 function jc -d 'journalctl'
   journalctl $argv
+end
+
+function sd -d 'sudo'
+  sudo $argv
 end
 
 function fuck -d 'Correct your previous console command'
