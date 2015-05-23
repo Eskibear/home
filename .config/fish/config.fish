@@ -13,11 +13,11 @@ end
 #end
 
 # sys
-function na -d 'netctl-auto'
+function na -d 'netctl-auto' --wraps=netctl-auto
   sudo netctl-auto $argv
 end
 
-function n -d 'netctl'
+function n -d 'netctl' --wraps=netctl
   sudo netctl $argv
 end
 
@@ -25,7 +25,11 @@ function rm -d 'rm -i'
   command rm -i $argv
 end
 
-function pm -d 'pacman'
+function sd -d 'sudo' --wraps=sudo
+  command sudo $argv
+end
+
+function pm -d 'pacman' --wraps=pacman 
   if echo $argv | grep -q -E '[-]S[^si]'
     sudo pacman $argv
   else
@@ -33,7 +37,7 @@ function pm -d 'pacman'
   end
 end
 
-function y -d 'yaourt'
+function y -d 'yaourt' --wraps=yaourt
   yaourt $argv
 end
 
@@ -41,7 +45,7 @@ function dmesg -d 'dmesg readable'
   command dmesg --human $argv
 end
 
-function sc -d 'systemctl'
+function sc -d 'systemctl' --wraps=systemctl
   if echo $argv | grep -q -E 'status'
     systemctl $argv
   else
@@ -67,7 +71,7 @@ function fuck -d 'Correct your previous console command'
     set -l fucked_up_command $history[1]
     thefuck $fucked_up_command > $eval_script
     . $eval_script
-    rm -f $eval_script
+    command rm -f $eval_script
     if test $exit_code -ne 0
         history --delete $fucked_up_command
     end
