@@ -25,7 +25,7 @@ function rm -d 'rm -i'
   command rm -i $argv
 end
 
-function sd -d 'sudo' --wraps=sudo
+function plz -d 'sudo' --wraps=sudo
   command sudo $argv
 end
 
