@@ -1,7 +1,6 @@
 import HttpGetter
 import json
 import keyring
-<<<<<<< HEAD
 from datetime import date
 with open("log/music164.log", "at") as f:
     f.write(str(date.today()))
