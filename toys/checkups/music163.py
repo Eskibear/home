@@ -1,8 +1,9 @@
 import HttpGetter
 import json
+import keyring
 username = keyring.get_password("netease", "username")
 data = { 
-        'username': username
+        'username': username,
         'password': keyring.get_password("netease", username),
         'rememberLogin':"false"
 }
