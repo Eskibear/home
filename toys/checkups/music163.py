@@ -1,6 +1,9 @@
 import HttpGetter
 import json
 import keyring
+from datetime import date
+with open("log/music164.log", "at") as f:
+    f.write(str(date.today()))
 username = keyring.get_password("netease", "username")
 data = { 
         'username': username,
@@ -23,16 +26,19 @@ hg.data = {
         'csrf_token': hg.cookies['__csrf']
         }
 soup = hg.get(checkup_url)
-print(soup.text)
+with open("log/music164.log", "at") as f:
+    f.write(soup.text)
 hg.data = {
         'type':'1',
         'csrf_token': hg.cookies['__csrf']
         }
 soup = hg.get(checkup_url)
-print(soup.text)
+with open("log/music164.log", "at") as f:
+    f.write(soup.text)
 hg.data = {
         'type':'2',
         'csrf_token': hg.cookies['__csrf']
         }
 soup = hg.get(checkup_url)
-print(soup.text)
+with open("log/music164.log", "at") as f:
+    f.write(soup.text+'\n')
