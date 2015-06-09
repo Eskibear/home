@@ -102,11 +102,11 @@ local layouts = {
 -- load tags layouts from config file
 function load_tags_config()
   default_tag_params = {
-    { "tty", 2},
-    { "Code", 2},
-    { "Web", 1},
-    { "File", 1},
-    { "Music", 1}
+    { "1-tty", 2},
+    { "2-Code", 2},
+    { "3-Web", 1},
+    { "4-File", 1},
+    { "5-Music", 1}
   }
   file = io.open(os.getenv("HOME") .. "/.awesome_tags")
   if file == nil then 
@@ -117,7 +117,7 @@ function load_tags_config()
       line = file:read()
       if line == nil then break end
       print (line)
-      n,v = string.match(line, "(%w+),(%d)")
+      n,v = string.match(line, "(.+),(%d)")
       table.insert(tag_params, {n, 1*v})
     end
   end
