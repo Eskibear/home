@@ -2,9 +2,11 @@ import HttpGetter
 import json
 import re
 import keyring
+from PIL import Image
+from pytesseract import *
 from datetime import date
-#with open("log/axw.log", "at") as f:
-#    f.write(str(date.today()))
+with open("log/axw.log", "at") as f:
+    f.write(str(date.today()))
 username = keyring.get_password("jaccount", "username")
 password = keyring.get_password("jaccount", username)
 
@@ -19,38 +21,45 @@ soup = hg.get(url)
 jaccount_url = soup.meta.attrs['content'][7:]
 soup = hg.get(jaccount_url)
 
-captcha_url = "https://jaccount.sjtu.edu.cn/jaccount/captcha"
-hg.down(captcha_url, '/tmp/a.jpg')
+logged = False
+times = 0
+while not logged and times <= 5:
+    times += 1
+    captcha_url = "https://jaccount.sjtu.edu.cn/jaccount/captcha"
+    hg.down(captcha_url, '/tmp/a.jpg')
+# parse jpg
+    im = Image.open('/tmp/a.jpg')
+    captcha = image_to_string(im)
+    data = {
+        'sid':soup.find("input", attrs={'name':'sid'}).attrs['value'],
+        'returl':soup.find("input", attrs={'name':'returl'}).attrs['value'],
+        'se':soup.find("input", attrs={'name':'se'}).attrs['value'],
+        'v':soup.find("input", attrs={'name':'v'}).attrs['value'],
+        'captcha':captcha,
+        'user':username,
+        'pass':password,
+        'imageField.x':55,
+        'imageField.y':3
+    }
 
-# TODO:parse jpg
-captcha = input()
+    hg.data = data
+    login_url = "https://jaccount.sjtu.edu.cn/jaccount/ulogin"
+    soup = hg.post(login_url)
 
-data = {
-    'sid':soup.find("input", attrs={'name':'sid'}).attrs['value'],
-    'returl':soup.find("input", attrs={'name':'returl'}).attrs['value'],
-    'se':soup.find("input", attrs={'name':'se'}).attrs['value'],
-    'v':soup.find("input", attrs={'name':'v'}).attrs['value'],
-    'captcha':captcha,
-    'user':username,
-    'pass':password,
-    'imageField.x':55,
-    'imageField.y':3
-}
+    ptn = re.compile(r'\'https.*\'')
+    next_url = ptn.findall(soup.text)[0][1:-1]
 
-hg.data = data
-login_url = "https://jaccount.sjtu.edu.cn/jaccount/ulogin"
-soup = hg.post(login_url)
+    logged = True
+    if next_url.find("loginfail")!=-1:
+        logged = False
+    hg.data = {}
+    soup = hg.get(next_url)
 
-ptn = re.compile(r'\'https.*\'')
-next_url = ptn.findall(soup.text)[0][1:-1]
-hg.data = {}
-soup = hg.get(next_url)
+money = "times out"
+if logged:
+    redirect_url = soup.meta.attrs['content'][7:]
+    soup = hg.get(redirect_url)
+    money = soup.find("ul",class_="header_userInfo_box").li.text.encode('ascii', 'ignore').decode('ascii')
 
-redirect_url = soup.meta.attrs['content'][7:]
-soup = hg.get(redirect_url)
-
-money = soup.find("ul",class_="header_userInfo_box").li.text.encode('ascii', 'ignore').decode('ascii')
-print(money)
-
-#with open("log/axw.log", "at") as f:
-#    f.write(soup.text)
+with open("log/axw.log", "at") as f:
+    f.write("total: "+money+'\n')
