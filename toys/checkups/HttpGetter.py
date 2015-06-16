@@ -1,4 +1,5 @@
 import requests
+import shutil
 from bs4 import BeautifulSoup
 class HttpGetter:
     def __init__(self):
@@ -12,7 +13,7 @@ class HttpGetter:
     def get(self, url):
         resp = self.session.get(url, headers = self.headers, params = self.data)
         self.cookies.update(resp.cookies)
-        self.lastresp =  resp
+        self.lastresp = resp
         self.headers['Referer'] = url
         print(resp.url)
         return BeautifulSoup(resp.content)
@@ -23,4 +24,11 @@ class HttpGetter:
         self.lastresp =  resp
         print(resp.url)
         return BeautifulSoup(resp.content)
+    
+    def down(self, url, path):
+        r = self.session.get(url, headers = self.headers, params = self.data, stream=True)
+        if r.status_code == 200:
+            with open(path, 'wb') as f:
+                r.raw.decode_content = True
+                shutil.copyfileobj(r.raw, f)        
 
