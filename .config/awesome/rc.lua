@@ -92,6 +92,7 @@ dropdownProg = terminal
 local layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile.right,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
@@ -189,6 +190,7 @@ mypowermenu = {
 }
 mymainmenu = awful.menu({ items = {
   { "=======", "" },
+  { "terminal", terminal },
   { "awesome",  myawesomemenu, beautiful.awesome_icon },
   { "power",  mypowermenu, beautiful.awesome_icon },
   { "=======", "" },
@@ -534,12 +536,12 @@ globalkeys = awful.util.table.join(
     --awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
 
     -- Default client focus
-    awful.key({ altkey }, "Tab",
+    awful.key({ altkey, "Shift" }, "Right",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ altkey, "Shift" }, "Tab",
+    awful.key({ altkey, "Shift" }, "Left",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -588,13 +590,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "Left",  function () awful.client.moveresize(-10,   0,   0,   0) end),
     awful.key({ modkey, "Shift"   }, "Right", function () awful.client.moveresize( 10,   0,   0,   0) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    -- awful.key({ modkey,           }, "Tab",
-    --     function ()
-    --         awful.client.focus.history.previous()
-    --         if client.focus then
-    --             client.focus:raise()
-    --         end
-    --     end),
+    awful.key({ altkey,           }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
+            end
+        end),
     awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
     awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
     awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
