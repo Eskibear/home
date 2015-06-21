@@ -98,3 +98,5 @@ au BufRead,BufNewFile *.trans set filetype=trans
 au FileType html setlocal cursorcolumn
 
 vmap <s-p> "0p
+
+set timeoutlen=100
