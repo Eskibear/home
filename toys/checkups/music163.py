@@ -19,7 +19,8 @@ soup = hg.get(url)
 hg.data = data
 soup = hg.post("http://music.163.com/api/login/?csrf_token=")
 recipe = json.loads(soup.text)
-
+# here comes 500 
+raise "hehe"
 checkup_url = "http://music.163.com/api/point/dailyTask"
 hg.data = {
         'type':'0',
