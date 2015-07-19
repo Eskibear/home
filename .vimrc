@@ -56,7 +56,7 @@ set bsdir=buffer
 set autochdir
 
 "tab switch
-map <s-tab> :tabn<CR>:e %<cr>
+map <s-tab> :tabn<CR>
 
 "========================
 "tab maximize
@@ -78,6 +78,8 @@ set foldlevel=100 " don't autofold anything (but I can still fold manually)
 set foldopen -=search " don't open folds when you search into them
 set foldopen -=undo " don't open folds when you undo stuff 
 set foldopen -=quickfix 
+au FileType python setlocal foldmethod=indent
+
 map <f2> :e ./<cr>
 
 let g:acp_enableAtStartup = 0 
