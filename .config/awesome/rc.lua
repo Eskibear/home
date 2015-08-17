@@ -610,10 +610,10 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
+    -- awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     -- Dropdown terminal
-    awful.key({        	          }, "F1",     function () drop(dropdownProg, "bottom", "center", 0.6, 0.5) end),
+    awful.key({ altkey,	          }, "F1",     function () drop(dropdownProg, "bottom", "center", 0.6, 0.5) end),
 
     -- Widgets popups
     awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
@@ -675,12 +675,12 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ altkey }, "F2", function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ altkey }, "F1",
-               function ()
-                   awful.prompt.run({ prompt = "Create Dropdown Prog for F1: " },
-                   mypromptbox[mouse.screen].widget,
-                   setF1DropProg, nil)
-               end),
+    -- awful.key({ altkey }, "F1",
+    --            function ()
+    --                awful.prompt.run({ prompt = "Create Dropdown Prog for F1: " },
+    --                mypromptbox[mouse.screen].widget,
+    --                setF1DropProg, nil)
+    --            end),
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
