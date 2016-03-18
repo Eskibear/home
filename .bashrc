@@ -26,7 +26,7 @@ alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
 alias la='ls -al --color=auto'
 alias grep='grep --color'
-alias sd='sudo'
+alias plz='sudo'
 alias sc='sudo systemctl'
 alias pm='sudo pacman'
 alias n='sudo netctl'
@@ -45,7 +45,7 @@ complete -F _pacman -o default pm
 complete -F _netctl -o default n
 complete -F _netctl_auto -o default na
 complete -F _yaourt -o default y
-complete -F _sudo -o default sd
+complete -F _sudo -o default plz
 
 #editor
 export EDITOR="vim"
