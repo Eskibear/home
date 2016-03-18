@@ -12,9 +12,17 @@ YELLOW='\[\e[1;33m\]'
 GRENN='\[\e[1;32m\]'
 BLUE='\[\e[1;34m\]'
 
-PS1='\n'$YELLOW'[\u '$GRENN'\H '$BLUE'\w'$ORE'\[\e[1;33m\]]\n\$> \[\e[0m\]'
-#\[\e[34m\]
-#\[\e[m\]
+# reveal git branch
+function git_branch {
+  git branch &> /dev/null
+  if [ $? -eq 0 ]; then 
+    GIT_BR=' -> '$(git branch | grep '*' | cut -d ' ' -f 2)
+  else 
+    GIT_BR=''
+  fi
+  PS1='\n'$YELLOW'[\u '$GRENN'\H '$BLUE'\w'$ORE$YELLOW']'$GIT_BR'\n\$> '$ORE
+}
+PROMPT_COMMAND="git_branch; $PROMPT_COMMAND"
 
 
 alias ..='cd ..'
