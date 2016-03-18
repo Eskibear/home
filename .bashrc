@@ -32,6 +32,7 @@ alias pm='sudo pacman'
 alias n='sudo netctl'
 alias na='sudo netctl-auto'
 alias y='yaourt'
+alias fuck='eval $(thefuck $(fc -ln -1))'
 
 # auto-completion for alias
 _completion_loader systemctl
@@ -51,9 +52,20 @@ export EDITOR="vim"
 
 # local bin folder
 export PATH=$PATH:~/.bin
-export PATH=$PATH:~/.gem/ruby/2.2.0/bin
+
+# ruby gem bin folder
+gem environment >> /dev/null
+if [ $? -eq 0 ]; then 
+  GEMPATH=$(gem environment| grep "USER INSTALLATION DIRECTORY" | cut -d ':' -f 2)
+  export PATH=$PATH:$GEMPATH/bin
+fi
 
 # including this ensures that new gnome-terminal tabs keep the parent `pwd` !
 if [ -e /etc/profile.d/vte.sh ]; then
     . /etc/profile.d/vte.sh
+fi
+
+# z for bash
+if [ -e /usr/lib/z.sh ]; then
+    . /usr/lib/z.sh
 fi

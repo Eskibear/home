@@ -65,10 +65,6 @@ nmap <c-s> <c-w>_<c-w>\|
 nmap ( a()<esc>i
 nmap [ a[]<esc>i
 nmap { a{}<esc>i<cr><esc>O
-" input brace map
-"inoremap ( ()<esc>i
-"inoremap [ []<esc>i
-"inoremap { {}<esc>i
 
 " folding
 "-------------------------------------------------------------------------------------
@@ -78,10 +74,11 @@ set foldlevel=100 " don't autofold anything (but I can still fold manually)
 set foldopen -=search " don't open folds when you search into them
 set foldopen -=undo " don't open folds when you undo stuff 
 set foldopen -=quickfix 
-au FileType python setlocal foldmethod=indent
 
 map <f2> :e ./<cr>
 
+" neocomplcache
+" ---------------------------------------------------------------
 let g:acp_enableAtStartup = 0 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
@@ -94,10 +91,11 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " inoremap <expr><CR>  pumvisible() ? "\<C-n>" : "\<CR>" 
 inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "
+" ---------------------------------------------------------------
 
 " JP translation related 
-au BufRead,BufNewFile *.trans set filetype=trans
 au FileType html setlocal cursorcolumn
+au FileType python setlocal foldmethod=indent
 
 vmap <s-p> "0p
 
