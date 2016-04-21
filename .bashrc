@@ -64,7 +64,7 @@ export PATH=$PATH:~/.bin
 # ruby gem bin folder
 gem environment >> /dev/null
 if [ $? -eq 0 ]; then 
-  GEMPATH=$(gem environment| grep "USER INSTALLATION DIRECTORY" | cut -d ':' -f 2)
+  GEMPATH=$(gem environment| grep "USER INSTALLATION DIRECTORY" | cut -d ' ' -f 7)
   export PATH=$PATH:$GEMPATH/bin
 fi
 
