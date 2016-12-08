@@ -10,7 +10,7 @@ set expandtab
 
 set ambiwidth=double
 
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 set noru
 set nu
@@ -76,6 +76,8 @@ set foldopen -=undo " don't open folds when you undo stuff
 set foldopen -=quickfix 
 
 map <f2> :e ./<cr>
+
+set guioptions=
 
 " neocomplcache
 " ---------------------------------------------------------------
