@@ -1,6 +1,3 @@
-[user]
-    name=Eskibear
-    email=me@eskibear.info
 [alias]
     co=checkout
     ci=commit
