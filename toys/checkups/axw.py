@@ -30,6 +30,7 @@ while not logged and times <= 5:
 # parse jpg
     im = Image.open('/tmp/a.jpg')
     captcha = image_to_string(im)
+    print(captcha)
     data = {
         'sid':soup.find("input", attrs={'name':'sid'}).attrs['value'],
         'returl':soup.find("input", attrs={'name':'returl'}).attrs['value'],
@@ -46,19 +47,18 @@ while not logged and times <= 5:
     login_url = "https://jaccount.sjtu.edu.cn/jaccount/ulogin"
     soup = hg.post(login_url)
 
-    ptn = re.compile(r'\'https.*\'')
-    next_url = ptn.findall(soup.text)[0][1:-1]
+    ptn = re.compile(r'https?.*')
 
     logged = True
-    if next_url.find("loginfail")!=-1:
+    if len(ptn.findall(soup.meta.attrs['content'])) == 0:
         logged = False
-    hg.data = {}
-    soup = hg.get(next_url)
+        hg.data = {}
+    else:
+        next_url = ptn.findall(soup.meta.attrs['content'])[0]
+        soup = hg.get(next_url)
 
 money = "times out"
 if logged:
-    redirect_url = soup.meta.attrs['content'][7:]
-    soup = hg.get(redirect_url)
     money = soup.find("ul",class_="header_userInfo_box").li.text.encode('ascii', 'ignore').decode('ascii')
 
 with open("log/axw.log", "at") as f:
