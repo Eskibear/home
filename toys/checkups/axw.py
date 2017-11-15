@@ -47,15 +47,15 @@ while not logged and times <= 5:
     login_url = "https://jaccount.sjtu.edu.cn/jaccount/ulogin"
     soup = hg.post(login_url)
 
+    while len(hg.lastresp.content) == 0:
+        soup = hg.get(hg.lastresp.url)
+
     ptn = re.compile(r'https?.*')
 
     logged = True
-    if len(ptn.findall(soup.meta.attrs['content'])) == 0:
+    if not hg.lastresp.url == 'http://aixinwu.sjtu.edu.cn/index.php/home':
         logged = False
         hg.data = {}
-    else:
-        next_url = ptn.findall(soup.meta.attrs['content'])[0]
-        soup = hg.get(next_url)
 
 money = "times out"
 if logged:
